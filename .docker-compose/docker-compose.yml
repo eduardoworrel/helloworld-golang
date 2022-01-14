@@ -1,5 +1,5 @@
 services:
-  app:
-    build: .
+  api:
+    build: ../src/.
     ports: 
       - 80:8081
