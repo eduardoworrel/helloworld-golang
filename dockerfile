@@ -1,10 +1,13 @@
-FROM golang:latest AS build
-WORKDIR /src
-COPY . .
-RUN go mod init helloworld
-RUN go build -o /out/example .
+FROM golang:latest
 
-FROM scratch AS bin
-COPY --from=build /out/example /
+RUN mkdir /app
 
-CMD ["go","run","main.go"]
+ADD . /app
+
+WORKDIR /app
+
+RUN go mod download
+
+RUN go build -o main .
+
+CMD ["/app/main"]
